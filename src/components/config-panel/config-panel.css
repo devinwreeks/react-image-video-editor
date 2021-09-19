@@ -1,0 +1,24 @@
+.configContainer {
+    background-color: rgba(189, 178, 183, 0.67);
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+}
+.configButton {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.menu-hide {
+    display: none;
+}
+
+.menu-show {
+    display: flex;
+    flex-direction: column;
+}
+
+.configButton:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,9 @@
+.showGallery {
+    position: absolute;
+    left: 70px;
+    top: 0px;
+}
+
+.hideGallery {
+    display: none;
+}

@@ -1,0 +1,35 @@
+.colorSelectContainer{
+    position: absolute;
+    display: flex;
+    top: -30px;
+    width: 100%;
+    margin-left: 15px;
+}
+
+.colorSelect{
+    padding: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #323232;
+}
+.selectedColor {
+    border: 2px solid #ea4e8e;
+}
+.colorBlack{
+    background-color: #282525;
+}
+.colorWhite{
+    background-color: #eadfdf;
+}
+.colorRed{
+    background-color: #ea2649;
+}
+.colorYellow{
+    background-color: #f1e114;
+}
+.colorGreen{
+    background-color: #4CAF50;
+}
+.colorBlue{
+    background-color: #2a62f3;
+}

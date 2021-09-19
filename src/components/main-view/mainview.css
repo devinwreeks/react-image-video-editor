@@ -1,0 +1,18 @@
+.rawTag {
+  visibility: hidden;
+  z-index: -1;
+  position: absolute;
+}
+.canvasTag {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+.configPanel {
+  z-index: 1;
+  position: absolute;
+  top: 25px;
+  left: 25px;
+}

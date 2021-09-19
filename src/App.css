@@ -1,0 +1,9 @@
+.center-upload {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+body {
+    margin: 0 !important;
+    background-color: #323232;
+}

@@ -1,0 +1,9 @@
+.showTextInput {
+    position: absolute;
+    left: 60px;
+
+}
+
+.hideTextInput {
+    display: none;
+}
