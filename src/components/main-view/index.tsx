@@ -3,101 +3,25 @@ import './mainview.css';
 import useWindowSize from '../../hooks/useWindowDimensions';
 import {ConfigPanel} from '../config-panel';
 import useDrawText from '../../hooks/useDrawText';
-import GreenFilter from '../../assets/green-filter.svg';
-import {PossibleColors, useColorStore} from '../../hooks/useColorStore';
-import {SubMenuItems, useMenuStore} from '../../hooks/useMenuStore';
 import {useCanvasStore} from '../../hooks/useCanvasStore';
-import useDrawPen from '../../hooks/usePenDraw';
+import {LayersMenu} from '../menu-items/layers-menu';
+import {useLayerStore} from '../../hooks/useLayerStore';
 
 type propsType = {
-    url: string;
-    mimeTypeFile: string;
     maxHeight?: number;
     maxWidth?: number;
 }
 
 export const MainView = (props: propsType) => {
+    console.log(props);
     const { height, width } = useWindowSize()
     const [setText] = useDrawText()
-
     const [textAreaState, setTextAreaState] = useState({x: 0, y: 0, w: 0, h: 0});
-    const [selectedText, setSelectedText] = useState(false);
-    const videoRef = useRef<HTMLVideoElement>(null!);
-    const canvasRef = useRef<HTMLCanvasElement>(null!);
-    const imageRef = useRef<HTMLImageElement>(null!);
-    const filterRef = useRef<HTMLImageElement>(null!);
+
 
     const setCanvas = useCanvasStore(state => state.setCanvas);
     const setContext = useCanvasStore(state => state.setContext);
-
-    // const setPenColour = useColorStore(state => state.setPenColor);
-    // const setWordColour = useColorStore(state => state.setWordColor);
-    // const subMenuSelected = useMenuStore(state => state.subMenu);
-    // const closeMenu = useMenuStore(state => state.setHamburgerMenu);
-
-    const addCanvasContext = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) => {
-        setCanvas(canvas);
-        setContext(context);
-    }
-
-    useEffect(() => {
-        console.log('re-render of canvas')
-        const canvas = canvasRef.current
-        const context = canvas.getContext('2d')
-
-        const heightRatio = 1.5;
-        canvas.height = canvas.width * heightRatio;
-        if (context == null) throw new Error('Could not get context');
-        addCanvasContext(canvas, context);
-
-        // if(props.mimeTypeFile == 'video') {
-        //     context.clearRect(0, 0, width, height);
-        //     listenPlay(context, canvas)
-        // }
-        if (props.mimeTypeFile == 'image') {
-            paintImage(context, canvas);
-            // if (context1 == null) throw new Error('Could not get context');
-            painLayer(context, canvas);
-            // requestAnimationFrame(paintImage.bind(this, context, canvas))
-        }
-
-    }, [props, width, height, canvasRef])
-
-
-
-    const painLayer = (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
-        // filterRef.current.addEventListener('load', () => {
-   //     console.log('painting filte')
-        // setTimeout(() => {
-            context.drawImage(
-                filterRef.current,
-                0,
-                0,
-                canvas.width,
-                canvas.height,
-            );
-        // }, 100)
-
-        // })
-    }
-
-    const paintImage = (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
-        imageRef.current.addEventListener('load', () => {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            context.drawImage(
-                imageRef.current,
-                0,
-                0,
-                canvas.width,
-                canvas.height,
-            );
-            setText('edit me')
-            painLayer(context, canvas)
-        });
-
-
-    }
+    const layers = useLayerStore(state => state.layer);
 
 
     const hitDetection = (_ctx: CanvasRenderingContext2D,  canvas: HTMLCanvasElement) => {
@@ -108,7 +32,6 @@ export const MainView = (props: propsType) => {
             if (e.clientX > textAreaState.x && (e.clientX < textAreaState.w - textAreaState.x)) {
                 if (e.clientY > textAreaState.y && (e.clientY < textAreaState.h + textAreaState.y)) {
                     //x: 0, y: 0, w: 0, h: 0
-                    setSelectedText(true);
                     setTextAreaState({x: textAreaState.x, y: 330, w: textAreaState.w, h: textAreaState.h});
                     // alert('here cunt')
                     console.log({x: textAreaState.x, y: 330, w: textAreaState.w, h: textAreaState.h})
@@ -120,40 +43,6 @@ export const MainView = (props: propsType) => {
     }
 
 
-
-
-    const updateCanvas = (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
-        drawWaterMark(context);
-        if (videoRef.current.ended || videoRef.current.paused) {
-            return;
-        }
-        context.drawImage(
-            videoRef.current,
-            0,
-            0,
-            canvas.width,
-            canvas.height,
-        )
-
-
-
-     //   requestAnimationFrame(updateCanvas.bind(this, context, canvas));
-    }
-
-    const drawWaterMark = (ctx: CanvasRenderingContext2D) => {
-
-        if(ctx) {
-            const text = 'spirefans.com/'
-            // @ts-ignore
-            ctx.font = '48px serif';
-            // @ts-ignore
-            ctx.fillText(text, 10, 50);
-            detectWaterMarkPosition(ctx, text);
-
-        }
-
-
-    }
 
     const detectWaterMarkPosition = (ctx: CanvasRenderingContext2D, text: string) => {
         if(ctx) {
@@ -175,17 +64,15 @@ export const MainView = (props: propsType) => {
         }
     }
 
+    const canvasLayers = layers.map((layerElement: HTMLCanvasElement) => layerElement)
+
     return (
         <>
-            <canvas ref={canvasRef} width={width}></canvas>
+            {layers.length === 0 ? <div style={{height: width * 1.5, width: width}}></div> : ''}
+            <div className="canvasLayers">{canvasLayers}</div>
             <div className="configPanel" >
                 <ConfigPanel />
             </div>
-            {/*<VideoSlider/>*/}
-            <video className="rawTag" ref={videoRef} autoPlay src={props.url}>
-            </video>
-            <img className="rawTag" ref={imageRef} src={props.url} />
-            <img className="rawTag" ref={filterRef} src="https://svguploadtestbucketdevin.s3.ap-southeast-2.amazonaws.com/purple-filter.svg"/>
         </>
     )
 }

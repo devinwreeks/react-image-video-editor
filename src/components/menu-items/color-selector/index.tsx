@@ -2,26 +2,27 @@ import React, {useCallback} from 'react';
 import './colorSelector.css';
 import {PossibleColors, useColorStore} from '../../../hooks/useColorStore';
 import {SubMenuItems, useMenuStore} from '../../../hooks/useMenuStore';
+import useDrawPen from '../../../hooks/usePenDraw';
 
 export const ColorSelector = () => {
     const setPenColour = useColorStore(state => state.setPenColor);
     const setWordColour = useColorStore(state => state.setWordColor);
     const subMenuSelected = useMenuStore(state => state.subMenu);
+    const {drawPen, createPreview} = useDrawPen();
 
-
-
-    const addColor = useCallback(
-        (color: PossibleColors, e: any) => {
+    const addColor = (color: PossibleColors, e: any) => {
             e.stopPropagation();
             if(subMenuSelected === SubMenuItems.penMenu) {
                 console.log(subMenuSelected)
                 setPenColour(color);
+                console.log(color)
+                drawPen(color)
+                // probably add new layer here too
+                createPreview();
             } else {
                 setWordColour(color);
             }
-        },
-        [],
-    );
+        }
 
 
     return (

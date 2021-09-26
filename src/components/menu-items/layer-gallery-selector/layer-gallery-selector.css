@@ -1,0 +1,31 @@
+.galleryContainer {
+    display: flex;
+    flex-direction: column;
+}
+.layergalleryItem {
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 80px;
+    background-color: rgba(229, 227, 227, 0.45);
+    justify-content: center;
+    display: flex;
+}
+
+.selectCanvasItem {
+    border: 1px solid black;
+    border-radius: 2px;
+    max-width: 80px;
+    max-height: 65px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+
+}
+.selectCanvasItem > .canvasLayer {
+    width: 80px;
+}
+.gu-mirror {
+    display: none;
+}

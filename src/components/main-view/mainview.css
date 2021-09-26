@@ -16,3 +16,9 @@
   top: 25px;
   left: 25px;
 }
+
+.canvasLayers :not(canvas:first-of-type){
+  position: absolute;
+  top: 0;
+  left: 0;
+}

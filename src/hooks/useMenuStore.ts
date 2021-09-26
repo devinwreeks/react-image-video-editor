@@ -4,7 +4,8 @@ export enum SubMenuItems {
     textMenu = "textMenu",
     filterMenu = "filterMenu",
     penMenu = "penMenu",
-    hamburger = "hamburger"
+    hamburger = "hamburger",
+    layerMenu = "layerMenu"
 }
 
 export interface MenuItems {

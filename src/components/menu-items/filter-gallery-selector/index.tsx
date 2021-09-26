@@ -1,10 +1,11 @@
 import React from "react"
-import "./gallery-selector.css"
+import "./filter-gallery-selector.css"
 import GreenFilter from '../../../assets/green-filter.svg';
 import PurpleFilter from '../../../assets/purple-filter.svg';
 import useDrawFilter from '../../../hooks/useDrawImage';
 export const GallerySelector = () => {
     const {addImage} = useDrawFilter();
+
     return (
         <>
         <div className="galleryContainer">

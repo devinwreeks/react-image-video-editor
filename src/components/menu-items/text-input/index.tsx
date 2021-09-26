@@ -15,7 +15,6 @@ export const TextInputMenu = () => {
                     <ColorSelector />
                 </div>
             </div>
-
         </>
     )
 }

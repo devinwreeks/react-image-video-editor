@@ -1,12 +1,10 @@
 import React from 'react';
 import './filter.css';
-import {GallerySelector} from '../gallery-selector';
+import {GallerySelector} from '../filter-gallery-selector';
 import {SubMenuItems, useMenuStore} from '../../../hooks/useMenuStore';
 
 export const FilterMenu = () => {
     const expanded = useMenuStore(state => state.subMenu);
-
-
     return (
         <>
             <div>

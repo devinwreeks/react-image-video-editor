@@ -6,6 +6,9 @@ import {SubMenuItems, useMenuStore} from '../../../hooks/useMenuStore';
 export const PenInput = () => {
     const penColor = useColorStore(state => state.penColor);
     const expanded = useMenuStore(state => state.subMenu);
+
+
+
     return (
         <>
             <div>
