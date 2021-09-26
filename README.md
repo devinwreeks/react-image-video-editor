@@ -37,7 +37,6 @@ or
 
 which will fill the width of your window.
 
-
 ### Dependencies used: 
 
 #### State management
