@@ -1,0 +1,17 @@
+.galleryContainer {
+    display: flex;
+    flex-direction: column;
+}
+.galleryItem {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 60px;
+}
+.removeFilter {
+    width: 60px;
+    font-size: 60px;
+    color: #ea2649;
+    font-weight: 800;
+    text-align: center;
+    font-family: "Open Sans";
+}

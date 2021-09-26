@@ -3,6 +3,7 @@ import {UploadButton} from './components/upload-button';
 import {useRef, useState} from 'react';
 import {MainView} from './components/main-view';
 import './App.css';
+import useDrawImage from './hooks/useDrawImage';
 
 type propsType = {
     height?: number;

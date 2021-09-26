@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import './mainview.css';
 import useWindowSize from '../../hooks/useWindowDimensions';
 import {ConfigPanel} from '../config-panel';
@@ -18,7 +18,7 @@ type propsType = {
 
 export const MainView = (props: propsType) => {
     const { height, width } = useWindowSize()
-    const [setText, setTextContext] = useDrawText()
+    const [setText] = useDrawText()
 
     const [textAreaState, setTextAreaState] = useState({x: 0, y: 0, w: 0, h: 0});
     const [selectedText, setSelectedText] = useState(false);
@@ -93,7 +93,6 @@ export const MainView = (props: propsType) => {
                 canvas.height,
             );
             setText('edit me')
-            setTextContext(context);
             painLayer(context, canvas)
         });
 

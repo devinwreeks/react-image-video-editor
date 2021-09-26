@@ -1,15 +1,18 @@
-import {useEffect, useState} from 'react';
-import useWindowSize from './useWindowDimensions';
+import {useState} from 'react';
+import {useCanvasStore} from './useCanvasStore';
+import {useColorStore} from './useColorStore';
 
 const useDrawText = () => {
-    const {width, height} = useWindowSize();
     const [text, setText] = useState('')
-    const [textContext, setTextContext] = useState<CanvasRenderingContext2D | null>(null);
-    if(textContext) {
-        textContext.font = '48px serif';
-        textContext.fillText(text, (width/2) - 50, (height/2) - 50);
+    const canvas = useCanvasStore(state => state.canvas);
+    const context = useCanvasStore(state => state.context);
+    const wordColor = useColorStore(state => state.wordColor);
+    if(context && canvas) {
+        context.font = '48px serif';
+        context.fillStyle = wordColor;
+        context.fillText(text, (canvas.width / 2 ) - 50, (canvas.height / 2) - 50);
     }
-    return [setText, setTextContext] as const;
+    return [setText] as const;
 
 }
 export default useDrawText;
